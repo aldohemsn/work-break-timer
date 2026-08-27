@@ -1,0 +1,14 @@
+{
+  "name": "职业活动与护眼计时器",
+  "short_name": "活动计时器",
+  "description": "为长时间屏幕工作设计的活动、看远与离屏休息提醒。",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#edf4ef",
+  "theme_color": "#1f765e",
+  "icons": [
+    {"src":"./assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
