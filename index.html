@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#edf4ef">
+  <meta name="description" content="为长时间屏幕工作设计的活动、看远与离屏休息提醒。">
+  <title>职业活动与护眼计时器</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./assets/icon.svg">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+  <main class="app-shell" id="appShell">
+    <header class="topbar">
+      <div><p class="eyebrow">职业健康 · 工作日</p><h1>活动与护眼计时器</h1></div>
+      <button class="icon-button settings-button" id="settingsToggle" type="button" aria-label="打开设置" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21v-7m0-4V3m8 18v-9m0-4V3m8 18v-5m0-4V3M1 14h6M9 8h6m2 8h6"/></svg>
+      </button>
+    </header>
+
+    <div class="workspace">
+      <section class="timer-card" aria-live="polite">
+        <div class="phase-row"><span class="status-dot"></span><span id="phaseLabel">专注工作</span><span class="cycle-count">今天完成 <b id="completedCount">0</b> 轮</span></div>
+        <div class="timer" id="timerDisplay" aria-label="剩余 50:00">50:00</div>
+        <p class="timer-guidance" id="timerGuidance">坐姿不必固定；这一轮结束后，真正离开屏幕。</p>
+        <div class="progress" role="progressbar" aria-label="本轮进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progressBar"></span></div>
+        <div class="primary-actions">
+          <button class="primary-button" id="startButton" type="button"><span class="button-icon" id="startIcon">▶</span><span id="startLabel">开始这一轮</span></button>
+          <button class="icon-button" id="resetButton" type="button" aria-label="重置本轮">↻</button>
+          <button class="icon-button" id="skipButton" type="button" aria-label="跳到下一阶段">⇥</button>
+        </div>
+      </section>
+
+      <aside class="side-stack">
+        <section class="eye-card" id="eyeCard">
+          <div class="icon-disc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <div><p class="card-kicker">近距离工作中断</p><h2 id="eyeTitle">每 20 分钟看远</h2><p>约 20 秒即可。看向窗外或房间远端，自然眨眼，不必做复杂眼操。</p></div>
+          <button class="secondary-button hidden" id="eyeDoneButton" type="button">✓ 完成</button>
+        </section>
+        <section class="notification-card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+          <div><h2>桌面提醒</h2><p id="notificationText">允许 Chrome 通知，切换到别的窗口也能看到提醒。</p></div>
+          <button class="secondary-button" id="notificationButton" type="button">开启</button>
+        </section>
+      </aside>
+    </div>
+
+    <section class="settings-panel hidden" id="settingsPanel" aria-label="计时设置">
+      <div class="settings-heading"><div><p class="card-kicker">适合当前工作负荷</p><h2>计时设置</h2></div><button class="text-button" id="settingsDone" type="button">完成</button></div>
+      <div class="number-grid">
+        <label>专注时长<span><input id="workMinutes" type="number" min="10" max="120" value="50"> 分钟</span></label>
+        <label>活动时长<span><input id="breakMinutes" type="number" min="1" max="30" value="5"> 分钟</span></label>
+        <label>看远间隔<span><input id="eyeMinutes" type="number" min="5" max="60" value="20"> 分钟</span></label>
+      </div>
+      <label class="switch-row"><span><strong>看远提醒</strong><small>工作阶段内给出温和提示</small></span><input id="eyeReminder" type="checkbox" checked role="switch"><i></i></label>
+      <label class="switch-row"><span><strong>提示音</strong><small>阶段切换时播放短提示音</small></span><input id="soundEnabled" type="checkbox" checked role="switch"><i></i></label>
+      <p class="settings-note">建议从 50 + 5 开始。重点是中断静态负荷，不必机械追求每轮都完全一致。</p>
+    </section>
+  </main>
+  <noscript>此工具需要启用 JavaScript 才能计时和发送提醒。</noscript>
+  <script src="./assets/app.js" defer></script>
+</body>
+</html>
